@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CompGraphicsApp", "CompGraphicsApp\CompGraphicsApp.vcxproj", "{B057BF23-5C2C-430D-B080-280B3D33E527}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B057BF23-5C2C-430D-B080-280B3D33E527}.Debug|x64.ActiveCfg = Debug|x64
+		{B057BF23-5C2C-430D-B080-280B3D33E527}.Debug|x64.Build.0 = Debug|x64
+		{B057BF23-5C2C-430D-B080-280B3D33E527}.Debug|x86.ActiveCfg = Debug|Win32
+		{B057BF23-5C2C-430D-B080-280B3D33E527}.Debug|x86.Build.0 = Debug|Win32
+		{B057BF23-5C2C-430D-B080-280B3D33E527}.Release|x64.ActiveCfg = Release|x64
+		{B057BF23-5C2C-430D-B080-280B3D33E527}.Release|x64.Build.0 = Release|x64
+		{B057BF23-5C2C-430D-B080-280B3D33E527}.Release|x86.ActiveCfg = Release|Win32
+		{B057BF23-5C2C-430D-B080-280B3D33E527}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2975A7EC-43BB-4185-B531-D51EED86A41E}
+	EndGlobalSection
+EndGlobal
