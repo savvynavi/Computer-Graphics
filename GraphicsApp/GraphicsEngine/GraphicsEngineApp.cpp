@@ -28,6 +28,24 @@ bool GraphicsEngineApp::startup() {
 	m_viewMatrix = glm::lookAt(vec3(10), vec3(0), vec3(0, 1, 0));
 	m_projectionMatrix = glm::perspective(glm::pi<float>() * 0.25f, 16.0f / 9.0f, 0.1f, 1000.0f);
 
+	//shader stuff
+	m_shader.loadShader(aie::eShaderStage::VERTEX, "./shaders/simple.vert");
+	m_shader.loadShader(aie::eShaderStage::FRAGMENT, "./shaders/simple.frag");
+	if (m_shader.link() == false) {
+		printf("Shader Error: %s\n", m_shader.getLastError());
+		return false;
+	}
+
+	m_dragon = new aie::OBJMesh;
+
+	if (m_dragon->load("./stanford/Dragon.obj") == false) {
+		printf("Dragon Mesh Error!\n");
+		return false;
+	}
+
+	m_testInstance = new Instance(m_dragon, &m_shader, glm::vec3(0, 0, 0), glm::vec3(10, 50, 0), glm::vec3(0.5, 0.5, 0.5));
+	m_dragon2 = new Instance(m_dragon, &m_shader, glm::vec3(0, 10, 0));
+
 	camera = new Camera();
 
 	return true;
@@ -59,6 +77,8 @@ void GraphicsEngineApp::update(float deltaTime) {
 	Gizmos::addTransform(mat4(1));
 
 	camera->Update();
+	m_testInstance->UpdateTransform();
+	m_dragon2->UpdateTransform();
 
 	// quit if we press escape
 	aie::Input* input = aie::Input::getInstance();
@@ -72,15 +92,14 @@ void GraphicsEngineApp::draw() {
 	// wipe the screen to the background colour
 	clearScreen();
 
-	// update perspective based on screen size
-	//m_projectionMatrix = glm::perspective(glm::pi<float>() * 0.25f, getWindowWidth() / (float)getWindowHeight(), 0.1f, 1000.0f);
 	//run different tests
-	Test();
 	m_projectionMatrix = camera->GetProjectionMatrix(getWindowWidth(), getWindowHeight());
 	m_viewMatrix = camera->GetViewMatrix();
-	Gizmos::draw(m_projectionMatrix * m_viewMatrix);
-}
 
-void GraphicsEngineApp::Test() {
-	Gizmos::addSphere(vec3(0), 3, 25, 25, vec4(0.72f, 0, 0.75f, 1));
+	m_testInstance->Draw(m_projectionMatrix, m_viewMatrix);
+	m_dragon2->Draw(m_projectionMatrix, m_viewMatrix);
+
+
+	Gizmos::draw(m_projectionMatrix * m_viewMatrix);
+	Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());
 }

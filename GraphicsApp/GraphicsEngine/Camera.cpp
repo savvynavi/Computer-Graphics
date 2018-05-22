@@ -8,7 +8,7 @@ Camera::Camera() : theta(0), phi(-20), position(-10, 4, 0){
 
 
 Camera::~Camera(){
-
+	
 }
 
 glm::mat4 Camera::GetProjectionMatrix(float width, float height) {
@@ -18,7 +18,7 @@ glm::mat4 Camera::GetProjectionMatrix(float width, float height) {
 glm::mat4 Camera::GetViewMatrix() {
 	float thetaR = theta * deg2Rad;
 	float phiR = phi * deg2Rad;
-	glm::vec3 forward(cos(phiR) * cos(thetaR), sin(phiR), cos(phiR) * cos(thetaR));
+	glm::vec3 forward(cos(phiR) * cos(thetaR), sin(phiR), cos(phiR) * sin(thetaR));
 	return glm::lookAt(position, position + forward, glm::vec3(0, 1, 0));
 }
 
@@ -28,7 +28,7 @@ void Camera::Update() {
 	float phiR = phi * deg2Rad;
 
 	//calculates the axes
-	glm::vec3 forward(cos(phiR) * cos(thetaR), sin(phiR), cos(phiR) * cos(thetaR));
+	glm::vec3 forward(cos(phiR) * cos(thetaR), sin(phiR), cos(phiR) * sin(thetaR));
 	glm::vec3 right(-sin(thetaR), 0, cos(thetaR));
 	glm::vec3 up(0, 1, 0);
 

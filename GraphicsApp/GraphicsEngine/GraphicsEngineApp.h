@@ -3,7 +3,10 @@
 #include "Application.h"
 #include <glm/mat4x4.hpp>
 #include"Camera.h"
-#include"FlyCamera.h"
+#include"Mesh.h"
+#include"Shader.h"
+#include"OBJMesh.h"
+#include"Instance.h"
 
 class GraphicsEngineApp : public aie::Application {
 public:
@@ -17,14 +20,22 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
-	//setup functions
-	void Test();
-
 protected:
 
 	// camera transforms
 	glm::mat4	m_viewMatrix;
 	glm::mat4	m_projectionMatrix;
+
+	aie::ShaderProgram		m_shader;
+	Mesh					m_mesh;
+	glm::mat4				m_quadTransform;
+	aie::OBJMesh			m_bunny;
+	glm::mat4				m_bunnyTransform;
+	aie::OBJMesh*			m_dragon;
+	glm::mat4				m_dragonTransform;
+
+	Instance*				m_testInstance;
+	Instance*				m_dragon2;
 
 	Camera* camera;
 };
