@@ -65,8 +65,31 @@ void Mesh::initialiseQuad(){
 	vertices[3].pos = {-0.5f, 0, -0.5f, 1};
 	vertices[4].pos = {0.5f, 0, 0.5f, 1};
 	vertices[5].pos = {0.5f, 0, -0.5f, 1};
+	//setting texture coordinates
+	vertices[0].texCoord = { 0, 1 };
+	vertices[1].texCoord = { 1, 1 };
+	vertices[2].texCoord = { 0, 0 };
+
+	vertices[3].texCoord = { 0, 0 };
+	vertices[4].texCoord = { 1, 1 };
+	vertices[5].texCoord = { 1, 0 };
+
+	//adding normals
+	vertices[0].normal = { 0, 1, 0, 0 };
+	vertices[1].normal = { 0, 1, 0, 0 };
+	vertices[2].normal = { 0, 1, 0, 0 };
+
+	vertices[3].normal = { 0, 1, 0, 0 };
+	vertices[4].normal = { 0, 1, 0, 0 };
+	vertices[5].normal = { 0, 1, 0, 0 };
 
 	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)16);
+
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)32);
 
 	//enable first element as the pos
 	glEnableVertexAttribArray(0);
