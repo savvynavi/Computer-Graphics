@@ -19,9 +19,11 @@ void Instance::UpdateTransform(){
 		* glm::scale(glm::mat4(1), m_scale);
 }
 
+//move phong stuff here
 void Instance::Draw(glm::mat4 projectionMat, glm::mat4 viewMat){
 	m_shader->bind();
 	glm::mat4 pmv = projectionMat * viewMat * m_transform;
 	m_shader->bindUniform("ProjectionViewModel", pmv);
+	m_shader->bindUniform("ModelMatrix", m_transform);
 	m_mesh->draw();
 }

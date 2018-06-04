@@ -50,8 +50,15 @@ protected:
 		glm::vec3 specular;
 	};
 
+	struct Material{
+		glm::vec3 ambient;
+		glm::vec3 diffuse;
+		glm::vec3 specular;
+	};
+
 	Light					m_light;
 	glm::vec3				m_ambientLight;
+	Material				m_material;
 
 	Camera* camera;
 };
