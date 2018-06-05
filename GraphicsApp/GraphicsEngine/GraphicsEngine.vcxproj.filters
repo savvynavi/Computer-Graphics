@@ -91,5 +91,11 @@
     <None Include="stanford\Dragon.mtl">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="shaders\normalmap.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\normalmap.frag">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

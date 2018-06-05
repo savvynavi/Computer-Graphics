@@ -12,7 +12,10 @@ public:
 	glm::mat4 getTransform(){ return m_transform; }
 	void UpdateTransform();
 
-	void Draw(glm::mat4 projectionMat, glm::mat4 viewMat);
+	void Draw(glm::mat4 projectionMat, glm::mat4 viewMat, glm::vec3 amb, glm::vec3 diff, glm::vec3 spec, glm::vec3 dir);
+
+	aie::ShaderProgram getShader(){ return *m_shader; }
+
 protected:
 	glm::vec3 m_pos;
 	glm::vec3 m_euler;

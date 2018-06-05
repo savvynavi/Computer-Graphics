@@ -7,6 +7,7 @@
 #include"Shader.h"
 #include"OBJMesh.h"
 #include"Instance.h"
+#include"Scene.h"
 
 class GraphicsEngineApp : public aie::Application {
 public:
@@ -20,10 +21,8 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
-	bool dragonsSetup();
-	void dragonsDraw();
-	bool meshTest();
-	void meshTestDraw();
+	bool lightingTest();
+	bool normMapSword();
 
 protected:
 
@@ -35,30 +34,15 @@ protected:
 	aie::ShaderProgram		m_shader;
 	Mesh					m_mesh;
 	glm::mat4				m_quadTransform;
-	aie::OBJMesh			m_bunny;
-	glm::mat4				m_bunnyTransform;
 	aie::OBJMesh*			m_dragon;
-	glm::mat4				m_dragonTransform;
+
+	Scene*					m_scene;
+	Instance*				m_instance1;
+	Instance*				m_instance2;
+
+	aie::ShaderProgram		m_swordShader;
 	aie::OBJMesh*			m_sword;
-
-	Instance*				m_testInstance;
-	Instance*				m_dragon2;
-
-	struct Light{
-		glm::vec3 direction;
-		glm::vec3 diffuse;
-		glm::vec3 specular;
-	};
-
-	struct Material{
-		glm::vec3 ambient;
-		glm::vec3 diffuse;
-		glm::vec3 specular;
-	};
-
-	Light					m_light;
-	glm::vec3				m_ambientLight;
-	Material				m_material;
+	Instance*				m_instance3;
 
 	Camera* camera;
 };

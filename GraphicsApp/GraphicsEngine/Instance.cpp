@@ -2,6 +2,7 @@
 #include "Instance.h"
 #include <glm/gtc/matrix_transform.hpp>
 
+//add enum
 Instance::Instance(aie::OBJMesh* mesh, aie::ShaderProgram* shader, glm::vec3 pos, glm::vec3 euler, glm::vec3 scale) : m_mesh(mesh), m_shader(shader), m_pos(pos), m_euler(euler), m_scale(scale){
 
 }
@@ -20,10 +21,20 @@ void Instance::UpdateTransform(){
 }
 
 //move phong stuff here
-void Instance::Draw(glm::mat4 projectionMat, glm::mat4 viewMat){
+void Instance::Draw(glm::mat4 projectionMat, glm::mat4 viewMat, glm::vec3 amb, glm::vec3 diff, glm::vec3 spec, glm::vec3 dir){
 	m_shader->bind();
 	glm::mat4 pmv = projectionMat * viewMat * m_transform;
 	m_shader->bindUniform("ProjectionViewModel", pmv);
 	m_shader->bindUniform("ModelMatrix", m_transform);
+	m_shader->bindUniform("CameraPosition", glm::vec3(glm::inverse(viewMat)[3]));
+
+	//phong shader stuff
+	m_shader->bindUniform("Ia", amb);
+	m_shader->bindUniform("Id", diff);
+	m_shader->bindUniform("Is", spec);
+	m_shader->bindUniform("LightDirection", dir);
+	
+	//will be -1 if the property isn't there
+	//m_shader->getUniform()
 	m_mesh->draw();
 }
