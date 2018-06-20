@@ -20,7 +20,6 @@ void Instance::UpdateTransform(){
 		* glm::scale(glm::mat4(1), m_scale);
 }
 
-//move phong stuff here
 void Instance::Draw(glm::mat4 projectionMat, glm::mat4 viewMat, glm::vec3 amb, glm::vec3 diff, glm::vec3 spec, glm::vec3 dir){
 	m_shader->bind();
 	glm::mat4 pmv = projectionMat * viewMat * m_transform;
@@ -33,8 +32,6 @@ void Instance::Draw(glm::mat4 projectionMat, glm::mat4 viewMat, glm::vec3 amb, g
 	m_shader->bindUniform("Id", diff);
 	m_shader->bindUniform("Is", spec);
 	m_shader->bindUniform("LightDirection", dir);
-	
-	//will be -1 if the property isn't there
-	//m_shader->getUniform()
+
 	m_mesh->draw();
 }

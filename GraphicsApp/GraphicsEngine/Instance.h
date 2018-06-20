@@ -25,4 +25,3 @@ protected:
 	aie::OBJMesh* m_mesh;
 	aie::ShaderProgram* m_shader;
 };
-

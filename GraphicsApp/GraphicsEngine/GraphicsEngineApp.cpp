@@ -28,16 +28,11 @@ bool GraphicsEngineApp::startup() {
 	m_viewMatrix = glm::lookAt(vec3(10), vec3(0), vec3(0, 1, 0));
 	m_projectionMatrix = glm::perspective(glm::pi<float>() * 0.25f, 16.0f / 9.0f, 0.1f, 1000.0f);
 
-	if(m_gridTex.load("./textures/numbered_grid.tga") == false){
-		printf("Failed to load texture\n");
-		return false;
-	}
-
 	camera = new Camera();
 
 	//different scene loads
-	//lightingTest();
-	normMapSword();
+	lightingTest();
+	//normMapSword();
 
 
 	return true;
@@ -110,6 +105,12 @@ bool GraphicsEngineApp::normMapSword(){
 		return false;
 	}
 
+	m_swordShader.loadShader(aie::eShaderStage::VERTEX, "./shaders/textured.vert");
+	m_swordShader.loadShader(aie::eShaderStage::FRAGMENT, "./shaders/textured.frag");
+	if(m_swordShader.link() == false){
+		printf("Shader Error: %s\n", m_swordShader.getLastError());
+		return false;
+	}
 
 	m_sword = new aie::OBJMesh;
 	if(m_sword->load("./soulspear/soulspear.obj", true, true) == false){
@@ -117,9 +118,12 @@ bool GraphicsEngineApp::normMapSword(){
 		return false;
 	}
 
-	m_instance3 = new Instance(m_sword, &m_shader);
+	m_instance3 = new Instance(m_sword, &m_shader, glm::vec3(0, 0, 0), glm::vec3(10, 50, 0));
+	m_instance1 = new Instance(m_sword, &m_swordShader, glm::vec3(0, 0, 2), glm::vec3(10, 50, 0));
+
 	std::vector<Instance*> objects;
 	objects.push_back(m_instance3);
+	objects.push_back(m_instance1);
 
 	m_scene = new Scene(objects, camera, m_projectionMatrix, m_viewMatrix, { 1, 0, 0 }, { 0.25f, 0.25f, 0.25f }, { 1, 1, 0 }, { 1, 1, 0 });
 

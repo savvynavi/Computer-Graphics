@@ -5,6 +5,7 @@ in vec3 vNormal;
 in vec3 vTangent;
 in vec3 vBiTangent;
 in vec4 vPosition;
+//in vec3 worldPos;
 
 out vec4 FragColour;
 
@@ -36,6 +37,9 @@ void main(){
 	vec3 texSpecular = texture(specularTexture, vTexCoord).rgb;
 	vec3 texNormal = texture(normalTexture, vTexCoord).rgb;
 	
+	N= TBN * (texNormal * 2 - 1);
+	N = normalize(N);
+
 	//calc lambert term
 	float lambertTerm = max(0, dot(N, -L));
 
@@ -52,4 +56,5 @@ void main(){
 	vec3 specular = Is * Ks * texSpecular * specularTerm;
 
 	FragColour = vec4(ambient + diffuse + specular, 1);
+	//FragColour = vec4(N,1);
 }

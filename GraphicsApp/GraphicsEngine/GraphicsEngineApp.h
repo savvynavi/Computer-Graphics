@@ -30,7 +30,6 @@ protected:
 	glm::mat4				m_viewMatrix;
 	glm::mat4				m_projectionMatrix;
 
-	aie::Texture			m_gridTex;
 	aie::ShaderProgram		m_shader;
 	Mesh					m_mesh;
 	glm::mat4				m_quadTransform;
