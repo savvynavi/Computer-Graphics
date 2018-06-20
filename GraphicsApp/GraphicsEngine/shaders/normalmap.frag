@@ -35,7 +35,7 @@ void main(){
 	vec3 texDiffuse = texture(diffuseTexture, vTexCoord).rgb;
 	vec3 texSpecular = texture(specularTexture, vTexCoord).rgb;
 	vec3 texNormal = texture(normalTexture, vTexCoord).rgb;
-
+	
 	//calc lambert term
 	float lambertTerm = max(0, dot(N, -L));
 
