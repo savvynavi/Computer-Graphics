@@ -43,5 +43,13 @@ protected:
 	aie::OBJMesh*			m_sword;
 	Instance*				m_instance3;
 
+	//point light
+
+	struct PointLight{
+		glm::vec3 pos;
+		glm::vec3 colour;
+		float intensity;
+	};
+
 	Camera* camera;
 };
