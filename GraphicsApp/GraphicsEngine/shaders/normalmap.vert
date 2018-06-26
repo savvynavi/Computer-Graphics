@@ -20,7 +20,6 @@ uniform mat3 NormalMatrix;
 
 void main(){
 
-	worldPos = Position;
 	vTexCoord = TexCoord;
 	vPosition = ModelMatrix * Position;
 	vNormal = (ModelMatrix * Normal).xyz;

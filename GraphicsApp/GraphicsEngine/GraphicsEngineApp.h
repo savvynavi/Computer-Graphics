@@ -42,6 +42,7 @@ protected:
 	aie::ShaderProgram		m_swordShader;
 	aie::OBJMesh*			m_sword;
 	Instance*				m_instance3;
+	Instance*				m_instance4;
 
 	//point light
 
@@ -50,6 +51,10 @@ protected:
 		glm::vec3 colour;
 		float intensity;
 	};
+
+	glm::vec3 m_pointLightPositions[2];
+	glm::vec3 m_pointLightsColour[2];
+	float m_pointLightsIntensity[2];
 
 	Camera* camera;
 };

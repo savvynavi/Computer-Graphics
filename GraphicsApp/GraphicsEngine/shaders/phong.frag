@@ -18,9 +18,10 @@ uniform vec3 LightDirection;
 uniform vec3 CameraPosition;
 
 //point lights
+uniform int numLights;
 uniform vec3 LightPosition[4];
-uniform vec3 pointLightColour;
-uniform float pointLightIntensity;
+uniform vec3 pointLightColour[4];
+uniform float pointLightIntensity[4];
 
 out vec4 FragColour;
 
@@ -52,27 +53,28 @@ void main(){
 
 
 	//point light (Loop it when you can have multiple point lights)
-	L = normalize(LightPosition[0] - vPosition.xyz);
+
+	for(int i = 0; i < numLights; i++){
+		L = normalize(LightPosition[i] - vPosition.xyz);
 	
-	lambertTerm = max(0, min(1, dot(N, -L)));
+		lambertTerm = max(0, min(1, dot(N, -L)));
 
-	//calculate view vector and reflection vector
-	V = normalize(CameraPosition - vPosition.xyz);
-	float distFromLight = length(LightPosition[0] - vPosition.xyz);
-	R = reflect(L, N);
+		//calculate view vector and reflection vector
+		V = normalize(CameraPosition - vPosition.xyz);
+		float distFromLight = length(LightPosition[i] - vPosition.xyz);
+		R = reflect(L, N);
 
-	//calc speculat term
-	specularTerm = pow(max(0, dot(R, V)), specularPower);
+		//calc speculat term
+		specularTerm = pow(max(0, dot(R, V)), specularPower);
 		
-	//calculate each colour property
-	diffuse += pointLightColour * Kd * lambertTerm;
-	specular += pointLightIntensity * Ks * specularTerm;
+		//attenuation calculation for points
+		attenuation = 1.0f / (0.01f + distFromLight*distFromLight);
 
-	//attenuation calculation for points
-	attenuation += 1.0f / (1.0f + (pointLightIntensity * pow(distFromLight, 2)));
+		//calculate each colour property
+		diffuse += pointLightColour[i] * Kd * lambertTerm * attenuation;
+		specular += pointLightIntensity[i] * Ks * specularTerm * attenuation;
+	}
 
 
-
-
-	FragColour = vec4(ambient + attenuation * (diffuse + specular), 1);
+	FragColour = vec4(ambient + (diffuse + specular), 1);
 }

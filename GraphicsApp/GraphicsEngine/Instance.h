@@ -12,7 +12,7 @@ public:
 	glm::mat4 getTransform(){ return m_transform; }
 	void UpdateTransform();
 
-	void Draw(glm::mat4 projectionMat, glm::mat4 viewMat, glm::vec3 amb, glm::vec3 diff, glm::vec3 spec, glm::vec3 dir,int numLights, glm::vec3& lPos, glm::vec3 colour, float intensity);
+	void Draw(glm::mat4 projectionMat, glm::mat4 viewMat, glm::vec3 amb, glm::vec3 diff, glm::vec3 spec, glm::vec3 dir,int numLights, glm::vec3* lPos, glm::vec3* colour, float* intensity);
 
 	aie::ShaderProgram getShader(){ return *m_shader; }
 

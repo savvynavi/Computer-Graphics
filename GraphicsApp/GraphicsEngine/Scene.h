@@ -8,7 +8,7 @@
 class Scene{
 public:
 	Scene();
-	Scene(std::vector<Instance*> instances, Camera* camera, glm::mat4 projectMat, glm::mat4 viewMat, glm::vec3 lightDir = {}, int numLights = 0, glm::vec3 lightAmbient = {}, glm::vec3 lightDiffuse = {}, glm::vec3 lightSpecular = {}, glm::vec3 lPos = {}, glm::vec3 colour = {}, float intensity = 0);
+	Scene(std::vector<Instance*> instances, Camera* camera, glm::mat4 projectMat, glm::mat4 viewMat, glm::vec3 lightDir = {}, int numLights = 0, glm::vec3 lightAmbient = {}, glm::vec3 lightDiffuse = {}, glm::vec3 lightSpecular = {}, glm::vec3* lPos = {}, glm::vec3* colour = {}, float* intensity = 0);
 	~Scene();
 
 	void Draw(int windowWidth, int windowHeight);
@@ -29,9 +29,9 @@ protected:
 	glm::mat4 m_projectionMatrix;
 	glm::mat4 m_viewMatrix;
 
-	glm::vec3 m_pointLightPos;
-	glm::vec3 m_pointLightColour;
-	float m_intensity;
+	glm::vec3* m_pointLightPos;
+	glm::vec3* m_pointLightColour;
+	float* m_intensity;
 	int m_numLights;
 };
 
